@@ -7,10 +7,13 @@ contrato, sin tocar el motor.
 
 ## Ideas clave del diseño
 
-- El motor solo entiende **dos tipos de interacción**: `seleccion-unica` y
-  `seleccion-multiple`. El campo `estilo` de cada fase es puramente cosmético
-  (le dice a `src/minigames/` qué componente renderizar) y no afecta el
-  puntaje.
+- El motor solo entiende **dos tipos de interacción para puntuar**:
+  `seleccion-unica` y `seleccion-multiple`. El campo `estilo` de cada fase es
+  puramente cosmético (le dice a `src/minigames/` qué componente renderizar) y
+  no afecta el puntaje. Dentro de `seleccion-unica`, el minijuego puede
+  presentarla como clic (botones), o como campo de texto que el jugador
+  escribe (`escribir`, ver más abajo) — el motor puntúa igual en ambos casos:
+  busca la opción cuyo `id` coincide con lo elegido/escrito.
 - Cada fase tiene 2-3 `decisiones`. Entre las 5 fases suman exactamente
   **12 decisiones**, cada una puntúa 0/30/60 (hasta 720 en total).
 - Bonos especiales (`bugCritico`, `usuarioReal`, hasta 80 pts combinados) van
@@ -18,9 +21,21 @@ contrato, sin tocar el motor.
 - El bono de tiempo restante (hasta 200 pts) y el descuento de pista (-20 c/u)
   los calcula el motor; no viven en el JSON salvo el `pistaTexto` opcional que
   habilita el descuento si el jugador la pide.
-- Timer global: default 660s (11 min) en el motor, puede sobreescribirse con
+- Timer global: default 960s (16 min) en el motor, puede sobreescribirse con
   `tiempoTotalSeg` en el JSON. Timer por fase: `tiempoSegFase`, auto-avanza al
   vencer (las decisiones sin responder puntúan 0).
+- **Nada de cuestionario disfrazado.** El público son chicos de secundaria que
+  no conocen las etapas de desarrollo ni la jerga técnica. Toda fase trae un
+  campo `explicacion` en lenguaje simple que se muestra completo, sin presión
+  de tiempo de decisión, antes de la primera decisión de esa fase. Y la
+  interacción de cada minijuego debe ser real: arrastrar en el wireframe,
+  escribir en el bloque de lógica — no todo botones (ver `tipoInteraccion:
+  'escribir'` más abajo).
+- **Placeholders de imagen.** El contrato ya reserva los campos `imagen`
+  (en `cliente` y en cada `fase`) para cuando la etapa de diseño entregue
+  retratos, diagramas e íconos. En esta etapa fea van en `null` y el motor
+  renderiza un placeholder gris con el texto alternativo — así el escenario
+  no necesita cambiar cuando lleguen los assets reales.
 
 ## Esquema
 
@@ -28,8 +43,8 @@ contrato, sin tocar el motor.
 Escenario
 ├─ id: string                          // 'ccorca', usado en localStorage y Supabase
 ├─ titulo: string
-├─ cliente: { nombre, rol, dolorFrase } // dolorFrase: máx 2 líneas
-├─ tiempoTotalSeg?: number              // opcional, default 660
+├─ cliente: { nombre, rol, dolorFrase, imagen? }  // dolorFrase: máx 2 líneas; imagen: placeholder, null por ahora
+├─ tiempoTotalSeg?: number              // opcional, default 960 (16 min)
 ├─ fases: Fase[5]                       // orden fijo: descubrir, disenar, construir, probar, desplegar
 └─ epilogos: Epilogo[]                  // buckets por rango de puntaje, orden no importa
 
@@ -38,24 +53,31 @@ Fase
 ├─ rol: string                          // 'Analista', 'Diseñador UX', ... (para el HUD/insignias)
 ├─ titulo: string
 ├─ intro?: string                       // diálogo del cliente, máx 2 líneas
-├─ tiempoSegFase: number                // segundos antes del auto-avance
+├─ explicacion: string                  // obligatorio. Lenguaje simple, sin jerga, explica qué
+│                                        // va a hacer el estudiante y por qué antes de decidir.
+│                                        // Se muestra completo, sin presión de tiempo de decisión,
+│                                        // con un botón "Entiendo, comenzar". ~4-6 líneas máx.
+├─ imagen?: string|null                 // placeholder de diagrama/foto de la fase, null por ahora
+├─ tiempoSegFase: number                // segundos antes del auto-avance (incluye lectura + decisión)
 ├─ estilo: 'entrevista'|'wireframe'|'logica'|'bugs'|'deploy'  // solo cosmético
 └─ decisiones: Decision[2-3]
 
 Decision
 ├─ id: string                           // único en el escenario, ej 'descubrir-1'
-├─ tipoInteraccion: 'seleccion-unica' | 'seleccion-multiple'
+├─ tipoInteraccion: 'seleccion-unica' | 'seleccion-multiple' | 'escribir'
 ├─ pregunta: string                     // máx 2 líneas
 ├─ pistaTexto?: string                  // si existe, el jugador puede pedirla (-20 pts)
 ├─ metaMinijuego?: object               // datos de flavor para el render (ej. plantillaCodigo)
-├─ seleccionExacta?: number             // solo seleccion-multiple: cuántas debe elegir
+├─ seleccionExacta?: number             // solo seleccion-multiple: cuántas debe elegir/arrastrar
 ├─ tablaPuntaje?: { [conteoCorrectos: string]: number }  // solo seleccion-multiple
+├─ feedbackSinCoincidencia?: string     // solo 'escribir': texto si lo tipeado no matchea ninguna opción
 └─ opciones: Opcion[]
 
 Opcion
 ├─ id: string
-├─ texto: string
-├─ puntaje?: number                     // 0|30|60, solo seleccion-unica
+├─ texto: string                        // en 'escribir', también es el valor que se matchea (trim, sin
+│                                        // importar mayúsculas) contra lo que tipeó el jugador
+├─ puntaje?: number                     // 0|30|60, solo seleccion-unica / escribir
 ├─ esCorrecta?: boolean                 // solo seleccion-multiple
 ├─ esTrampa?: boolean                   // cosmético/feedback, no cambia el puntaje
 ├─ descubrimiento?: string              // texto revelado al elegir (usado en 'entrevista')
@@ -67,6 +89,17 @@ Epilogo
 ├─ max: number
 └─ texto: string
 ```
+
+### `tipoInteraccion: 'escribir'`
+
+Igual que `seleccion-unica` para el motor (busca en `opciones` la que
+coincide), pero el minijuego la renderiza como un campo de texto/número que el
+jugador escribe (ej. completar el hueco de una línea de código), no como
+botones. Si lo escrito no matchea el `texto` de ninguna opción, el motor no
+encuentra opción → puntúa 0, y el minijuego muestra `feedbackSinCoincidencia`
+en vez del `feedback` de una opción concreta. Se usa en la fase "construir"
+(`src/minigames/Logica.jsx`), donde el estudiante literalmente escribe el
+valor del umbral o la hora, tal como en la propuesta original (§5, Fase 3).
 
 ### Cómo puntúa el motor una decisión
 
@@ -89,16 +122,19 @@ Epilogo
   "cliente": {
     "nombre": "Rosa",
     "rol": "Profesora",
-    "dolorFrase": "Las baterías se descargan sin aviso y los chicos pierden clases de computación."
+    "dolorFrase": "Las baterías se descargan sin aviso y los chicos pierden clases de computación.",
+    "imagen": null
   },
-  "tiempoTotalSeg": 660,
+  "tiempoTotalSeg": 960,
   "fases": [
     {
       "id": "descubrir",
       "rol": "Analista",
       "titulo": "Fase 1 · Descubrir",
+      "explicacion": "Un analista es la primera persona que habla con el cliente antes de programar cualquier cosa. Su trabajo es entender bien el problema real preguntando, no inventar una solución de una vez. Ahora vas a hacer 3 preguntas a la profesora Rosa: elige con cuidado, porque cada pregunta que 'gastas' en algo que no importa es una que no vas a poder volver a hacer.",
       "intro": "Videollamada con la profesora Rosa. Tienes tiempo para 3 preguntas.",
-      "tiempoSegFase": 132,
+      "imagen": null,
+      "tiempoSegFase": 200,
       "estilo": "entrevista",
       "decisiones": [
         {
@@ -130,7 +166,9 @@ Epilogo
       "id": "disenar",
       "rol": "Diseñador UX",
       "titulo": "Fase 2 · Diseñar",
-      "tiempoSegFase": 132,
+      "explicacion": "Un diseñador decide qué ve el usuario en la pantalla, y sobre todo qué NO ve: menos elementos, más claro. El portero no es programador ni le interesa serlo: solo necesita saber en un segundo si algo anda mal. Vas a armar su pantalla arrastrando elementos, y luego decidir el idioma y los colores.",
+      "imagen": null,
+      "tiempoSegFase": 200,
       "estilo": "wireframe",
       "decisiones": [
         {

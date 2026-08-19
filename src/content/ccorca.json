@@ -4,16 +4,19 @@
   "cliente": {
     "nombre": "Rosa",
     "rol": "Profesora",
-    "dolorFrase": "Las baterías se descargan sin aviso y los chicos pierden clases de computación."
+    "dolorFrase": "Las baterías se descargan sin aviso y los chicos pierden clases de computación.",
+    "imagen": null
   },
-  "tiempoTotalSeg": 660,
+  "tiempoTotalSeg": 960,
   "fases": [
     {
       "id": "descubrir",
       "rol": "Analista",
       "titulo": "Fase 1 · Descubrir",
+      "explicacion": "En una empresa de software, antes de programar cualquier cosa, alguien tiene que hablar con el cliente y entender bien su problema. A esa persona se le llama analista, y ese vas a ser tú ahora. La profesora Rosa tiene un problema con las baterías de su colegio: vas a hacerle 3 preguntas para entenderlo mejor. Elige con cuidado: cada pregunta que uses en algo que no importa es una que ya no vas a poder hacer.",
       "intro": "Videollamada con la profesora Rosa. Tienes tiempo para 3 preguntas.",
-      "tiempoSegFase": 132,
+      "imagen": null,
+      "tiempoSegFase": 200,
       "estilo": "entrevista",
       "decisiones": [
         {
@@ -99,8 +102,10 @@
       "id": "disenar",
       "rol": "Diseñador UX",
       "titulo": "Fase 2 · Diseñar",
+      "explicacion": "Ya sabes que el portero revisa las baterías, que no hay wifi (solo señal de celular) y que su teléfono se queda sin batería seguido. Ahora te toca ser el diseñador: la persona que decide qué ve el portero en la pantalla de su celular. La regla de oro del diseño no es agregar cosas bonitas, es elegir bien qué NO poner, para que el portero entienda todo de un vistazo.",
       "intro": "Con lo que sabes de Rosa y el portero, decide qué va en la pantalla.",
-      "tiempoSegFase": 132,
+      "imagen": null,
+      "tiempoSegFase": 200,
       "estilo": "wireframe",
       "decisiones": [
         {
@@ -178,15 +183,18 @@
       "id": "construir",
       "rol": "Desarrollador",
       "titulo": "Fase 3 · Construir",
+      "explicacion": "Programar no es magia: es traducir una decisión humana a una regla exacta que la computadora pueda seguir al pie de la letra. Vas a armar la regla de alerta escribiendo tú mismo los valores que faltan en el código, como lo haría un desarrollador de verdad. No necesitas saber programar: cada hueco tiene una pregunta simple detrás. Escribe el valor y presiona RUN para ver qué responde el sistema.",
       "intro": "Arma la regla de alerta con bloques. Al final, tú escribes la última línea.",
-      "tiempoSegFase": 132,
+      "imagen": null,
+      "tiempoSegFase": 220,
       "estilo": "logica",
       "decisiones": [
         {
           "id": "construir-1",
-          "tipoInteraccion": "seleccion-unica",
+          "tipoInteraccion": "escribir",
           "pregunta": "SI batería < ___ %",
           "metaMinijuego": { "plantillaCodigo": "if (bateria < ___ && hora > 18) enviarSMS(portero);" },
+          "feedbackSinCoincidencia": "Ese número no lo probamos hoy. Prueba con uno de los valores que discutiste con Rosa: 10, 20 o 50.",
           "opciones": [
             { "id": "10", "texto": "10", "puntaje": 30, "feedback": "Muy bajo: casi no da tiempo de reaccionar antes del corte." },
             { "id": "20", "texto": "20", "puntaje": 60, "feedback": "Correcto: da margen suficiente para actuar." },
@@ -195,9 +203,10 @@
         },
         {
           "id": "construir-2",
-          "tipoInteraccion": "seleccion-unica",
+          "tipoInteraccion": "escribir",
           "pregunta": "Y hora > ___",
           "metaMinijuego": { "plantillaCodigo": "if (bateria < 20 && hora > ___) enviarSMS(portero);" },
+          "feedbackSinCoincidencia": "Ese valor no lo probamos hoy. Prueba con una hora del día: 6, 18 o 22.",
           "opciones": [
             { "id": "18", "texto": "18", "puntaje": 60, "feedback": "Coincide con el horario de más uso de la sala de cómputo." },
             { "id": "6", "texto": "6", "puntaje": 0, "esTrampa": true, "feedback": "Genera alertas casi todo el día, sin foco en el momento crítico." },
@@ -206,13 +215,14 @@
         },
         {
           "id": "construir-3",
-          "tipoInteraccion": "seleccion-unica",
-          "pregunta": "→ ¿Qué hace el sistema al cumplirse la condición?",
+          "tipoInteraccion": "escribir",
+          "pregunta": "→ ¿Qué hace el sistema al cumplirse la condición? (escribe: enviarSMS, enviarEmail o mostrarPopupWeb)",
           "metaMinijuego": { "plantillaCodigo": "if (bateria < 20 && hora > 18) ___;" },
+          "feedbackSinCoincidencia": "Eso no lo probamos hoy. Escribe una de las tres acciones que viste: enviarSMS, enviarEmail o mostrarPopupWeb.",
           "opciones": [
-            { "id": "enviarSMS", "texto": "enviarSMS(portero)", "puntaje": 60, "feedback": "✔ SMS enviado a +51 9... — funciona sin depender de apps abiertas." },
-            { "id": "enviarEmail", "texto": "enviarEmail(portero)", "puntaje": 0, "esTrampa": true, "feedback": "El portero no tiene correo que revise a diario." },
-            { "id": "popupWeb", "texto": "mostrarPopupWeb()", "puntaje": 30, "feedback": "Funciona a medias: solo si el portero tiene el sitio abierto." }
+            { "id": "enviarSMS", "texto": "enviarSMS", "puntaje": 60, "feedback": "✔ SMS enviado a +51 9... — funciona sin depender de apps abiertas." },
+            { "id": "enviarEmail", "texto": "enviarEmail", "puntaje": 0, "esTrampa": true, "feedback": "El portero no tiene correo que revise a diario." },
+            { "id": "popupWeb", "texto": "mostrarPopupWeb", "puntaje": 30, "feedback": "Funciona a medias: solo si el portero tiene el sitio abierto." }
           ]
         }
       ]
@@ -221,8 +231,10 @@
       "id": "probar",
       "rol": "QA",
       "titulo": "Fase 4 · Probar",
+      "explicacion": "Antes de que algo llegue a los usuarios reales, alguien tiene que probarlo a fondo y decidir qué arreglar primero: a esa persona se le llama QA (control de calidad). Nunca hay tiempo para arreglar todo, así que hay que priorizar. Tu sistema ya está instalado en el colegio y llegaron 3 reportes de problemas; solo te alcanza para arreglar uno.",
       "intro": "Tu app ya está en el colegio. Llegan 3 reportes; solo alcanzas a arreglar 1.",
-      "tiempoSegFase": 132,
+      "imagen": null,
+      "tiempoSegFase": 180,
       "estilo": "bugs",
       "decisiones": [
         {
@@ -284,8 +296,10 @@
       "id": "desplegar",
       "rol": "DevOps",
       "titulo": "Fase 5 · Desplegar",
+      "explicacion": "La última etapa es hacer que el sistema realmente llegue a la persona que lo va a usar: eso se llama desplegar, y quien lo hace es el DevOps. De nada sirve construir la mejor app si el usuario real no puede usarla. Tienes que elegir cómo entregarle la alerta al portero, pensando en el celular que él realmente tiene, no en el que te gustaría que tuviera.",
       "intro": "¿App en Play Store, web, o SMS puro? Solo una funciona con el celular del portero.",
-      "tiempoSegFase": 132,
+      "imagen": null,
+      "tiempoSegFase": 160,
       "estilo": "deploy",
       "decisiones": [
         {

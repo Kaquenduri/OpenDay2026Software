@@ -1,6 +1,6 @@
 # MISIÓN DEPLOY — contexto del proyecto
 
-Simulador web tipo videojuego para un taller de 25 minutos donde estudiantes de 4to y 5to de secundaria viven el ciclo de desarrollo de software resolviendo un problema social peruano. Se usa en el laboratorio de cómputo de Tecsup Arequipa, en varias sesiones, con leaderboard por sesión y premiación al top 3.
+Simulador web tipo videojuego para un taller de ~30 minutos donde estudiantes de 4to y 5to de secundaria viven el ciclo de desarrollo de software resolviendo un problema social peruano. Se usa en el laboratorio de cómputo de Tecsup Arequipa, en varias sesiones, con leaderboard por sesión y premiación al top 3.
 
 La propuesta completa está en `docs/propuesta.md`. **Léela antes de proponer cambios de alcance.** El estado y la bitácora de avance están en `docs/PLAN.md`.
 
@@ -9,9 +9,10 @@ La propuesta completa está en `docs/propuesta.md`. **Léela antes de proponer c
 1. **El motor no contiene narrativa.** Ni un solo string de historia, pregunta, opción o feedback vive en `src/`. Todo el contenido está en `src/content/*.json`. Si necesitas texto para probar, ponlo en el JSON.
 2. **Agregar un escenario nuevo = agregar un JSON.** Si un escenario nuevo obligara a tocar el motor, el diseño del motor está mal.
 3. **La partida corre offline.** Ninguna fase puede quedar bloqueada esperando red. Supabase solo se usa al inicio (resolver sesión abierta) y al final (guardar partida), y ambos fallan en silencio hacia un modo local.
-4. **Público real: chicos de 15-17 años en 11 minutos.** Máximo 2 líneas de texto por decisión. Cero jerga técnica antes del final. Si una pantalla necesita explicación del facilitador, está mal diseñada.
-5. **Objetivo 1366×768, horizontal, sin scroll durante la partida.** Es la resolución típica del laboratorio.
-6. **Sin audio indispensable.** Las PCs del lab no tienen parlantes. Todo sonido es decorativo.
+4. **Público real: chicos de 15-17 años en ~16 minutos, sin saber nada de desarrollo de software.** No conocen las etapas del ciclo de vida, ni jerga técnica, ni programación. Cada fase abre con una explicación explícita y breve en lenguaje simple (qué va a hacer, por qué, sin dar por sabido nada) *antes* de pedir la primera decisión — recién ahí se decide. Máximo 2 líneas de texto por decisión (la explicación de fase puede ser un poco más larga, pero se lee una sola vez por fase, no en cada decisión). Cero jerga técnica antes del final. Si una pantalla necesita explicación del facilitador, está mal diseñada.
+5. **No todo es un cuestionario.** Cada minijuego debe usar la interacción que le corresponda de verdad — arrastrar en el wireframe, escribir en el bloque de lógica — no un listado de botones disfrazado. Selección por clic solo cuando la decisión real es "elegir una opción de una lista" (entrevista, bugs, deploy).
+6. **Objetivo 1366×768, horizontal, sin scroll durante la partida.** Es la resolución típica del laboratorio.
+7. **Sin audio indispensable.** Las PCs del lab no tienen parlantes. Todo sonido es decorativo.
 
 ## Stack
 

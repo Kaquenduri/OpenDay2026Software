@@ -1,7 +1,7 @@
 // Lógica pura de puntaje y progreso. No conoce narrativa: solo lee la forma
 // del contrato descrito en docs/contrato-escenario.md.
 
-export const TIEMPO_TOTAL_DEFAULT_SEG = 660; // 11 min
+export const TIEMPO_TOTAL_DEFAULT_SEG = 960; // 16 min
 export const BONO_TIEMPO_MAX = 200;
 export const PENALIZACION_PISTA = 20;
 

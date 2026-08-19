@@ -20,24 +20,24 @@ Un simulador web tipo videojuego donde el estudiante de secundaria recibe un pro
 |---|---|
 | Mostrar cómo el área responde a una causa | Los 3 escenarios salen directo de la causa global: energía limpia, seguridad laboral, producción responsable |
 | Hacer sentir al estudiante protagonista | Él **es** el desarrollador contratado. Sus decisiones cambian el epílogo de la historia |
-| Breve, participativo, inspirador | 25 min cronometrados, 0 minutos de diapositivas pasivas, 12 decisiones por partida |
+| Breve, participativo, inspirador | ~30 min cronometrados, 0 minutos de diapositivas pasivas, 12 decisiones por partida |
 | Diferencial tecnológico Tecsup | El propio taller es el diferencial: no hablamos de software, lo hacen. Cierre conecta con laboratorios, XR, GDG y proyectos reales del Centro de Innovación |
 | Problemática concreta + aporte de la carrera | Cada escenario abre con un cliente humano con un dolor específico, no con un tema abstracto |
 
 ---
 
-## 3. Guion de los 25 minutos
+## 3. Guion de los ~30 minutos
 
 | Tiempo | Bloque | Qué pasa |
 |---|---|---|
-| 0:00–2:00 | **Gancho** | Facilitador: *"En los próximos 20 minutos ustedes van a ser contratados. Alguien en el Perú tiene un problema y solo el software lo puede resolver."* Se proyecta el leaderboard vacío con los nombres de sus colegios |
+| 0:00–2:00 | **Gancho** | Facilitador: *"En los próximos 25 minutos ustedes van a ser contratados. Alguien en el Perú tiene un problema y solo el software lo puede resolver."* Se proyecta el leaderboard vacío con los nombres de sus colegios |
 | 2:00–4:00 | **Registro + elección** | La PC ya tiene el juego abierto en la pantalla de inicio. Escribe nombre y colegio con teclado (rápido), elige uno de 3 escenarios |
-| 4:00–15:00 | **La partida (11 min)** | Timer visible. 5 fases, 2–3 decisiones cada una, auto-avance si se pasan del tiempo |
-| 15:00–19:00 | **Debrief guiado** | Facilitador proyecta 3 decisiones críticas: *"El 70% de ustedes eligió la app bonita. Miren qué pasó."* Aquí se nombra cada rol real: analista, UX, dev, QA, DevOps |
-| 19:00–22:00 | **Leaderboard en vivo + premiación** | Se proyecta el top 5 de **esa sesión**. Premio a los 3 primeros |
-| 22:00–25:00 | **Cierre motivacional** | 60 s de "esto que acabas de hacer es un semestre de la carrera" + QR a la carrera/admisión |
+| 4:00–20:00 | **La partida (16 min)** | Timer visible. 5 fases; cada una abre con una explicación breve en lenguaje simple (nada de jerga) antes de pedir decisiones, y combina clic, arrastrar y escribir según la fase. Auto-avance si se pasan del tiempo |
+| 20:00–24:00 | **Debrief guiado** | Facilitador proyecta 3 decisiones críticas: *"El 70% de ustedes eligió la app bonita. Miren qué pasó."* Aquí se nombra cada rol real: analista, UX, dev, QA, DevOps |
+| 24:00–27:00 | **Leaderboard en vivo + premiación** | Se proyecta el top 5 de **esa sesión**. Premio a los 3 primeros |
+| 27:00–30:00 | **Cierre motivacional** | 60 s de "esto que acabas de hacer es un semestre de la carrera" + QR a la carrera/admisión |
 
-> El juego dura 11 minutos reales. El resto es lo que convierte el juego en taller.
+> El juego dura 16 minutos reales (subido de los 11 originales tras el primer prototipo jugable: los estudiantes de secundaria necesitan que cada etapa se les explique explícitamente antes de decidir, no solo un cuestionario). El resto es lo que convierte el juego en taller. Este número es provisional — la etapa 5 del plan de construcción (§10, ensayo con estudiantes reales) es la que lo confirma o ajusta.
 
 ---
 
@@ -63,7 +63,7 @@ Una asociación de productoras de quinua vende a intermediarios que les pagan la
 
 ## 5. Anatomía de una partida
 
-5 fases × ~2 min. Ejemplo con el escenario A:
+5 fases × ~3 min (incluye una explicación breve, en lenguaje simple, antes de las decisiones de cada fase — el estudiante de secundaria no conoce las etapas de desarrollo ni la jerga técnica, así que cada una se presenta explícitamente antes de pedirle decidir). Ejemplo con el escenario A:
 
 ### Fase 1 · DESCUBRIR *(el analista)*
 Videollamada con la profesora Rosa. Tienes tiempo para **3 preguntas de 6 posibles**.
@@ -207,7 +207,7 @@ Los `check` del esquema ya bloquean el intento obvio de meter 999999 puntos desd
 | **Navegador** | Verificar Chrome/Edge actualizado. Build con target ES2019 por si alguna máquina está atrasada |
 | **Aforo real** | El número de PCs operativas define el aforo. Si hay más estudiantes que PCs, se pasa a parejas (ver §11) |
 
-**Modo pareja:** el registro acepta hasta dos nombres (`Andrea M. y Luis C.`) y guarda `modo: 'pareja'`. En el leaderboard aparecen como una fila. No hace falta lógica extra ni ranking separado: en 25 minutos separar categorías confunde más de lo que aporta. Además las parejas suelen sacar mejor puntaje porque discuten las decisiones — si eso te molesta para la premiación, el panel del facilitador puede filtrar el ranking a solo individuales con un click.
+**Modo pareja:** el registro acepta hasta dos nombres (`Andrea M. y Luis C.`) y guarda `modo: 'pareja'`. En el leaderboard aparecen como una fila. No hace falta lógica extra ni ranking separado: en ~30 minutos separar categorías confunde más de lo que aporta. Además las parejas suelen sacar mejor puntaje porque discuten las decisiones — si eso te molesta para la premiación, el panel del facilitador puede filtrar el ranking a solo individuales con un click.
 
 ---
 
