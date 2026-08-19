@@ -1,0 +1,167 @@
+/* Tokens del diseño aprobado (canvas "Misión Deploy — Diseño"). No inventar
+   valores nuevos aquí: si algo no está cubierto, se vuelve al diseño. */
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/pixelify-sans-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('../assets/fonts/baloo2-latin-variable.woff2') format('woff2');
+}
+
+:root {
+  --bg: #0b1220;
+  --panel: #101a30;
+  --panel-alt: #182543;
+  --border: #25324f;
+
+  --text: #eef2f9;
+  --text-dim: #8fa0c2;
+
+  --cyan: #4ad9ff;
+  --pink: #ff5c9d;
+  --green: #2fe6a6;
+  --gold: #ffd166;
+  --red: #ff5c6a;
+  --tecsup: #ff5a36;
+
+  --pixel: 'Pixelify Sans', monospace;
+  --body: 'Baloo 2', system-ui, sans-serif;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+}
+
+button,
+input {
+  font-family: var(--body);
+}
+
+input::placeholder {
+  color: #5d6b8c;
+}
+
+a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+a:hover {
+  color: #8ce9ff;
+}
+
+/* Primitivas reusadas por pantallas y minijuegos */
+
+.panel {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+}
+
+.chip {
+  background: var(--panel-alt);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+.chip:hover:not(:disabled) {
+  border-color: var(--cyan);
+}
+.chip.on {
+  border-color: var(--green);
+  background: rgba(47, 230, 166, 0.12);
+}
+.chip:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #08281f;
+  font-family: var(--body);
+  font-weight: 800;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 26px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn-pixel {
+  font-family: var(--pixel);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.btn-outline-danger {
+  background: transparent;
+  border: 2px solid var(--red);
+  color: var(--red);
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.label-pixel {
+  font-family: var(--pixel);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.feedback-box {
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.feedback-box.ok {
+  background: rgba(47, 230, 166, 0.12);
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+.feedback-box.info {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+}

@@ -5,7 +5,7 @@ export default function Entrevista({ decision, onElegir }) {
     <DecisionUnica
       decision={decision}
       onElegir={onElegir}
-      encabezado={<h3>📞 Videollamada con el cliente</h3>}
+      encabezado={<div className="label-pixel">📞 VIDEOLLAMADA CON EL CLIENTE</div>}
     />
   );
 }

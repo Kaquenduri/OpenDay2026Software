@@ -1,0 +1,146 @@
+.resultado {
+  width: 100%;
+  height: 100vh;
+  min-height: 768px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.resultado-cuerpo {
+  flex: 1;
+  display: flex;
+  gap: 24px;
+  padding: 22px 28px;
+  min-height: 0;
+}
+
+.resultado-columna {
+  flex: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resultado-epilogo {
+  background: linear-gradient(135deg, #183a2e, #0f2620);
+  border: 2px solid var(--green);
+  border-radius: 14px;
+  padding: 22px 26px;
+}
+.resultado-epilogo .rotulo {
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.resultado-epilogo .texto {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.resultado-desglose {
+  border-radius: 14px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.resultado-puntaje {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 0 0 auto;
+}
+.resultado-puntaje .total {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+.resultado-puntaje .sobre {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.resultado-lista {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.resultado-lista .fila {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.resultado-lista .fila span:first-child {
+  color: var(--text-dim);
+  font-weight: 600;
+}
+.resultado-lista .fila span:last-child {
+  font-weight: 800;
+}
+
+.resultado-ranking {
+  flex: 1;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.resultado-fila-ranking {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel-alt);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.resultado-fila-ranking.propia {
+  background: rgba(255, 209, 102, 0.12);
+  border: 1px solid var(--gold);
+}
+.resultado-fila-ranking .puesto {
+  font-family: var(--pixel);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-dim);
+  width: 22px;
+}
+.resultado-fila-ranking.propia .puesto {
+  color: var(--gold);
+}
+.resultado-fila-ranking .nombre {
+  font-size: 14px;
+  font-weight: 800;
+}
+.resultado-fila-ranking .colegio {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.resultado-fila-ranking .puntos {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.resultado-footer {
+  height: 34px;
+  flex: 0 0 auto;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 11px;
+  color: var(--text-dim);
+}

@@ -28,51 +28,44 @@ function SeleccionMultiple({ decision, onElegir }) {
 
   return (
     <div>
-      <p>{decision.pregunta} ({seleccionados.length}/{max})</p>
+      <div style={{ fontSize: 15, fontWeight: 800, marginBottom: 10 }}>
+        {decision.pregunta} <span style={{ color: 'var(--text-dim)', fontWeight: 600, fontSize: 13 }}>({seleccionados.length}/{max})</span>
+      </div>
       <div style={{ display: 'flex', gap: 16 }}>
-        <div style={{ flex: 1 }}>
-          <p><strong>Elementos disponibles</strong> (arrástralos a la pantalla →)</p>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {disponibles.map((opcion) => (
-              <li key={opcion.id} style={{ marginBottom: 4 }}>
-                <div
-                  draggable={!confirmado}
-                  onDragStart={() => setArrastrando(opcion.id)}
-                  onDragEnd={() => setArrastrando(null)}
-                  onClick={() => agregar(opcion.id)}
-                  style={{ border: '1px solid #999', padding: 8, cursor: 'grab', background: '#fafafa' }}
-                >
-                  {opcion.texto}
-                </div>
-              </li>
-            ))}
-          </ul>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <div style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 700, marginBottom: 2 }}>Elementos disponibles (arrástralos →)</div>
+          {disponibles.map((opcion) => (
+            <div
+              key={opcion.id}
+              className="chip"
+              draggable={!confirmado}
+              onDragStart={() => setArrastrando(opcion.id)}
+              onDragEnd={() => setArrastrando(null)}
+              onClick={() => agregar(opcion.id)}
+              style={{ cursor: 'grab', padding: '8px 12px', fontSize: 13 }}
+            >
+              {opcion.texto}
+            </div>
+          ))}
         </div>
         <div
           data-testid="zona-destino-wireframe"
-          style={{ flex: 1, border: '2px dashed #999', minHeight: 160, padding: 8 }}
+          style={{ flex: 1, border: '2px dashed var(--border)', borderRadius: 8, minHeight: 120, padding: 8, display: 'flex', flexDirection: 'column', gap: 6 }}
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault();
             if (arrastrando) agregar(arrastrando);
           }}
         >
-          <p><strong>Pantalla del celular del portero</strong></p>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {puestos.map((opcion) => (
-              <li key={opcion.id} style={{ marginBottom: 4 }}>
-                <div
-                  onClick={() => quitar(opcion.id)}
-                  style={{ border: '1px solid #4a4', padding: 8, background: '#eaffea', cursor: 'pointer' }}
-                >
-                  {opcion.texto} ✕
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 700, marginBottom: 2 }}>Pantalla del celular del portero</div>
+          {puestos.map((opcion) => (
+            <div key={opcion.id} className="chip on" onClick={() => quitar(opcion.id)} style={{ padding: '8px 12px', fontSize: 13 }}>
+              {opcion.texto} ✕
+            </div>
+          ))}
         </div>
       </div>
-      <button type="button" disabled={confirmado || seleccionados.length !== max} onClick={confirmar}>
+      <button type="button" className="btn-primary" style={{ marginTop: 12 }} disabled={confirmado || seleccionados.length !== max} onClick={confirmar}>
         Confirmar pantalla
       </button>
     </div>
@@ -86,10 +79,12 @@ export default function Wireframe({ decision, onElegir }) {
   if (decision.tipoInteraccion === 'seleccion-multiple') {
     return (
       <div>
-        <h3>📱 Wireframe</h3>
-        <SeleccionMultiple decision={decision} onElegir={onElegir} />
+        <div className="label-pixel">📱 WIREFRAME</div>
+        <div style={{ marginTop: 10 }}>
+          <SeleccionMultiple decision={decision} onElegir={onElegir} />
+        </div>
       </div>
     );
   }
-  return <DecisionUnica decision={decision} onElegir={onElegir} encabezado={<h3>📱 Diseño de pantalla</h3>} />;
+  return <DecisionUnica decision={decision} onElegir={onElegir} encabezado={<div className="label-pixel">📱 DISEÑO DE PANTALLA</div>} />;
 }

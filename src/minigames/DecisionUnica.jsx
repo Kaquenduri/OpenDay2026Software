@@ -15,25 +15,24 @@ export default function DecisionUnica({ decision, onElegir, encabezado }) {
   return (
     <div>
       {encabezado}
-      <p>{decision.pregunta}</p>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <div style={{ fontSize: 15, fontWeight: 800, margin: '10px 0' }}>{decision.pregunta}</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 10 }}>
         {decision.opciones.map((opcion) => (
-          <li key={opcion.id} style={{ marginBottom: 4 }}>
-            <button
-              type="button"
-              disabled={!!elegidaId}
-              onClick={() => elegir(opcion.id)}
-              style={{ background: elegidaId === opcion.id ? '#ddd' : undefined }}
-            >
-              {opcion.texto}
-            </button>
-          </li>
+          <button
+            key={opcion.id}
+            type="button"
+            className={`chip${elegidaId === opcion.id ? ' on' : ''}`}
+            disabled={!!elegidaId}
+            onClick={() => elegir(opcion.id)}
+          >
+            {opcion.texto}
+          </button>
         ))}
-      </ul>
+      </div>
       {opcionElegida && (
         <div>
-          {opcionElegida.descubrimiento && <p>💬 {opcionElegida.descubrimiento}</p>}
-          {opcionElegida.feedback && <p><em>{opcionElegida.feedback}</em></p>}
+          {opcionElegida.descubrimiento && <div className="feedback-box info">💬 {opcionElegida.descubrimiento}</div>}
+          {opcionElegida.feedback && <div className="feedback-box ok">{opcionElegida.feedback}</div>}
         </div>
       )}
     </div>

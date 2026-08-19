@@ -1,0 +1,114 @@
+.seleccion {
+  width: 100%;
+  height: 100vh;
+  min-height: 768px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.seleccion-cuerpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+}
+
+.seleccion-encabezado {
+  text-align: center;
+}
+.seleccion-encabezado .titulo {
+  font-family: var(--pixel);
+  font-weight: 700;
+  font-size: 20px;
+}
+.seleccion-encabezado .subtitulo {
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 600;
+  margin-top: 8px;
+  max-width: 560px;
+}
+
+.seleccion-cards {
+  display: flex;
+  gap: 24px;
+}
+
+.seleccion-card {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.15s;
+}
+.seleccion-card.disponible:hover {
+  border-color: var(--cyan);
+}
+.seleccion-card.bloqueada {
+  opacity: 0.55;
+}
+
+.seleccion-card .portada {
+  height: 150px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seleccion-card .etiqueta {
+  font-size: 11px;
+  font-family: var(--pixel);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.seleccion-card .titulo {
+  font-size: 18px;
+  font-weight: 800;
+}
+.seleccion-card .dolor {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.seleccion-card button {
+  margin-top: auto;
+  font-weight: 800;
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 12px;
+}
+.seleccion-card .btn-elegir {
+  background: var(--green);
+  color: #08281f;
+  border: none;
+  cursor: pointer;
+}
+.seleccion-card .btn-proximamente {
+  background: var(--panel-alt);
+  color: var(--text-dim);
+  border: 2px solid var(--border);
+  cursor: default;
+}
+
+.seleccion-footer {
+  height: 34px;
+  flex: 0 0 auto;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 11px;
+  color: var(--text-dim);
+}

@@ -5,7 +5,7 @@ export default function Deploy({ decision, onElegir }) {
     <DecisionUnica
       decision={decision}
       onElegir={onElegir}
-      encabezado={<h3>🚀 Despliegue</h3>}
+      encabezado={<div className="label-pixel">🚀 DESPLIEGUE</div>}
     />
   );
 }

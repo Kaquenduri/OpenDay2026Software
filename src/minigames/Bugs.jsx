@@ -5,7 +5,7 @@ export default function Bugs({ decision, onElegir }) {
     <DecisionUnica
       decision={decision}
       onElegir={onElegir}
-      encabezado={<h3>🐞 Bandeja de bugs</h3>}
+      encabezado={<div className="label-pixel">🐞 BANDEJA DE BUGS</div>}
     />
   );
 }

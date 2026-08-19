@@ -29,9 +29,10 @@ src/
   engine/      máquina de estados de fases, scoring, timer, cola de envío
   screens/     una carpeta por pantalla
   minigames/   los 5 tipos: entrevista, wireframe, logica, bugs, deploy
+  ui/          componentes visuales compartidos entre pantallas (TopBar, EscenaCliente)
   content/     un JSON por escenario (contenido, no código)
   lib/         supabase.js, queue.js, storage.js
-  styles/      tokens.css y estilos por componente
+  styles/      tokens.css (fuente de verdad del diseño) y un .css por componente
 ```
 
 ## Convenciones
