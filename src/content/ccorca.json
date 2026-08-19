@@ -1,0 +1,326 @@
+{
+  "id": "ccorca",
+  "titulo": "Luz para Ccorca",
+  "cliente": {
+    "nombre": "Rosa",
+    "rol": "Profesora",
+    "dolorFrase": "Las baterías se descargan sin aviso y los chicos pierden clases de computación."
+  },
+  "tiempoTotalSeg": 660,
+  "fases": [
+    {
+      "id": "descubrir",
+      "rol": "Analista",
+      "titulo": "Fase 1 · Descubrir",
+      "intro": "Videollamada con la profesora Rosa. Tienes tiempo para 3 preguntas.",
+      "tiempoSegFase": 132,
+      "estilo": "entrevista",
+      "decisiones": [
+        {
+          "id": "descubrir-1",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Elige tu primera pregunta para Rosa",
+          "opciones": [
+            {
+              "id": "quien-revisa",
+              "texto": "¿Quién revisa las baterías hoy?",
+              "puntaje": 60,
+              "esTrampa": false,
+              "descubrimiento": "Es el portero, y no sabe leer el medidor.",
+              "feedback": "Bien: ahora sabes quién opera el sistema día a día."
+            },
+            {
+              "id": "color-app",
+              "texto": "¿Qué color prefiere para la app?",
+              "puntaje": 0,
+              "esTrampa": true,
+              "descubrimiento": "Pierdes tu pregunta en algo que no importa aún.",
+              "feedback": "Programar sin entender el problema es la forma más cara de fallar."
+            }
+          ]
+        },
+        {
+          "id": "descubrir-2",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Elige tu segunda pregunta",
+          "opciones": [
+            {
+              "id": "wifi",
+              "texto": "¿Hay señal de internet en el colegio?",
+              "puntaje": 60,
+              "esTrampa": false,
+              "descubrimiento": "Hay señal de celular, no wifi. Esto cambia todo el diseño.",
+              "feedback": "Descubrimiento clave: la solución tiene que funcionar por SMS, no por wifi."
+            },
+            {
+              "id": "años-colegio",
+              "texto": "¿Cuántos años tiene el colegio?",
+              "puntaje": 0,
+              "esTrampa": true,
+              "descubrimiento": "Un dato curioso, pero no ayuda a resolver el problema.",
+              "feedback": "Simpático, pero no acerca a ninguna decisión de diseño."
+            }
+          ]
+        },
+        {
+          "id": "descubrir-3",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Elige tu tercera pregunta",
+          "opciones": [
+            {
+              "id": "celular-portero",
+              "texto": "¿Qué pasa cuando el celular del portero se queda sin batería?",
+              "puntaje": 60,
+              "esTrampa": false,
+              "descubrimiento": "Se queda sin batería seguido: las alertas deben llegar por SMS, sin depender de apps abiertas.",
+              "feedback": "Excelente: confirma que la solución debe ser a prueba de fallos del propio celular."
+            },
+            {
+              "id": "cuantos-alumnos",
+              "texto": "¿Cuántos estudiantes usan la sala de cómputo?",
+              "puntaje": 30,
+              "esTrampa": false,
+              "descubrimiento": "20 alumnos por turno. Un dato útil, aunque no cambia el diseño.",
+              "feedback": "Útil para dimensionar el problema, pero no es la pregunta más urgente."
+            },
+            {
+              "id": "android-iphone",
+              "texto": "¿Prefiere Android o iPhone?",
+              "puntaje": 0,
+              "esTrampa": true,
+              "descubrimiento": "Rosa no tiene ninguno de los dos: usa un celular de botones.",
+              "feedback": "Preguntar por marcas antes de entender el problema es empezar al revés."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "disenar",
+      "rol": "Diseñador UX",
+      "titulo": "Fase 2 · Diseñar",
+      "intro": "Con lo que sabes de Rosa y el portero, decide qué va en la pantalla.",
+      "tiempoSegFase": 132,
+      "estilo": "wireframe",
+      "decisiones": [
+        {
+          "id": "disenar-1",
+          "tipoInteraccion": "seleccion-multiple",
+          "pregunta": "Arrastra 4 elementos a la pantalla del celular del portero",
+          "seleccionExacta": 4,
+          "tablaPuntaje": { "4": 60, "3": 30, "2": 30, "1": 0, "0": 0 },
+          "opciones": [
+            { "id": "boton-grande", "texto": "Botón gigante verde/rojo de estado", "esCorrecta": true },
+            { "id": "numero-bateria", "texto": "Número grande con % de batería", "esCorrecta": true },
+            { "id": "icono-alerta", "texto": "Ícono de alerta cuando hay riesgo", "esCorrecta": true },
+            { "id": "texto-instrucciones", "texto": "Una línea con la instrucción a seguir", "esCorrecta": true },
+            { "id": "dashboard-12", "texto": "Dashboard con 12 gráficos", "esCorrecta": false },
+            { "id": "grafico-historial", "texto": "Gráfico de historial de 30 días", "esCorrecta": false },
+            { "id": "lista-eventos", "texto": "Lista larga de eventos técnicos", "esCorrecta": false },
+            { "id": "boton-config-avanzada", "texto": "Botón de configuración avanzada", "esCorrecta": false }
+          ]
+        },
+        {
+          "id": "disenar-2",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "¿Pantalla en español o con iconos sin texto?",
+          "opciones": [
+            {
+              "id": "iconos",
+              "texto": "Iconos sin texto",
+              "puntaje": 60,
+              "feedback": "El portero no siempre lee rápido bajo presión: los iconos ganan."
+            },
+            {
+              "id": "espanol",
+              "texto": "Texto en español",
+              "puntaje": 30,
+              "feedback": "Funciona, pero es más lento de entender de un vistazo."
+            },
+            {
+              "id": "ingles-tecnico",
+              "texto": "Términos técnicos en inglés (battery, alert...)",
+              "puntaje": 0,
+              "esTrampa": true,
+              "feedback": "El portero no entiende jerga técnica en otro idioma; se pierde el mensaje."
+            }
+          ]
+        },
+        {
+          "id": "disenar-3",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "¿Qué colores usar para las alertas?",
+          "opciones": [
+            {
+              "id": "semaforo",
+              "texto": "Verde = todo bien, rojo = alerta (semáforo)",
+              "puntaje": 60,
+              "feedback": "Un código de colores universal, no requiere explicación."
+            },
+            {
+              "id": "azules-corporativos",
+              "texto": "Escala de azules corporativos",
+              "puntaje": 30,
+              "feedback": "Se ve prolijo, pero no comunica urgencia de un vistazo."
+            },
+            {
+              "id": "iconos-banco",
+              "texto": "Los mismos íconos que la app de su banco",
+              "puntaje": 0,
+              "esTrampa": true,
+              "feedback": "Reusar iconos de otra app solo confunde al portero."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "construir",
+      "rol": "Desarrollador",
+      "titulo": "Fase 3 · Construir",
+      "intro": "Arma la regla de alerta con bloques. Al final, tú escribes la última línea.",
+      "tiempoSegFase": 132,
+      "estilo": "logica",
+      "decisiones": [
+        {
+          "id": "construir-1",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "SI batería < ___ %",
+          "metaMinijuego": { "plantillaCodigo": "if (bateria < ___ && hora > 18) enviarSMS(portero);" },
+          "opciones": [
+            { "id": "10", "texto": "10", "puntaje": 30, "feedback": "Muy bajo: casi no da tiempo de reaccionar antes del corte." },
+            { "id": "20", "texto": "20", "puntaje": 60, "feedback": "Correcto: da margen suficiente para actuar." },
+            { "id": "50", "texto": "50", "puntaje": 0, "esTrampa": true, "feedback": "Satura de alertas todo el día por algo que aún no es urgente." }
+          ]
+        },
+        {
+          "id": "construir-2",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Y hora > ___",
+          "metaMinijuego": { "plantillaCodigo": "if (bateria < 20 && hora > ___) enviarSMS(portero);" },
+          "opciones": [
+            { "id": "18", "texto": "18", "puntaje": 60, "feedback": "Coincide con el horario de más uso de la sala de cómputo." },
+            { "id": "6", "texto": "6", "puntaje": 0, "esTrampa": true, "feedback": "Genera alertas casi todo el día, sin foco en el momento crítico." },
+            { "id": "22", "texto": "22", "puntaje": 30, "feedback": "Ya es tarde: se pierde la ventana útil para actuar a tiempo." }
+          ]
+        },
+        {
+          "id": "construir-3",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "→ ¿Qué hace el sistema al cumplirse la condición?",
+          "metaMinijuego": { "plantillaCodigo": "if (bateria < 20 && hora > 18) ___;" },
+          "opciones": [
+            { "id": "enviarSMS", "texto": "enviarSMS(portero)", "puntaje": 60, "feedback": "✔ SMS enviado a +51 9... — funciona sin depender de apps abiertas." },
+            { "id": "enviarEmail", "texto": "enviarEmail(portero)", "puntaje": 0, "esTrampa": true, "feedback": "El portero no tiene correo que revise a diario." },
+            { "id": "popupWeb", "texto": "mostrarPopupWeb()", "puntaje": 30, "feedback": "Funciona a medias: solo si el portero tiene el sitio abierto." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "probar",
+      "rol": "QA",
+      "titulo": "Fase 4 · Probar",
+      "intro": "Tu app ya está en el colegio. Llegan 3 reportes; solo alcanzas a arreglar 1.",
+      "tiempoSegFase": 132,
+      "estilo": "bugs",
+      "decisiones": [
+        {
+          "id": "probar-1",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Solo alcanzas a arreglar 1 reporte. ¿Cuál?",
+          "opciones": [
+            {
+              "id": "bateria-rapida",
+              "texto": "No llega la alerta cuando la batería baja rápido",
+              "puntaje": 60,
+              "bonus": { "tipo": "bugCritico", "puntos": 40 },
+              "feedback": "Es el bug que causó el problema original: prioridad correcta."
+            },
+            {
+              "id": "alerta-madrugada",
+              "texto": "La alerta llega a las 3 de la mañana",
+              "puntaje": 30,
+              "feedback": "Molesto, pero no rompe el propósito del sistema."
+            },
+            {
+              "id": "logo-chico",
+              "texto": "El logo se ve chico",
+              "puntaje": 0,
+              "esTrampa": true,
+              "feedback": "Cosmético: no vale gastar tu único arreglo en esto."
+            }
+          ]
+        },
+        {
+          "id": "probar-2",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "¿Cómo confirmas que el bug quedó resuelto?",
+          "opciones": [
+            {
+              "id": "prueba-real",
+              "texto": "Pides a Rosa que pruebe con la batería real del colegio",
+              "puntaje": 60,
+              "feedback": "Probar en condiciones reales es la única forma de confiar en el arreglo."
+            },
+            {
+              "id": "revisar-codigo",
+              "texto": "Revisas el código una vez más en pantalla",
+              "puntaje": 30,
+              "feedback": "Ayuda, pero no reemplaza probarlo con el usuario real."
+            },
+            {
+              "id": "asumir-compila",
+              "texto": "Asumes que funciona porque compila sin errores",
+              "puntaje": 0,
+              "esTrampa": true,
+              "feedback": "Que compile no significa que resuelva el problema del portero."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "desplegar",
+      "rol": "DevOps",
+      "titulo": "Fase 5 · Desplegar",
+      "intro": "¿App en Play Store, web, o SMS puro? Solo una funciona con el celular del portero.",
+      "tiempoSegFase": 132,
+      "estilo": "deploy",
+      "decisiones": [
+        {
+          "id": "desplegar-1",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "¿Cómo despliegas la alerta al portero?",
+          "opciones": [
+            {
+              "id": "sms",
+              "texto": "SMS puro",
+              "puntaje": 60,
+              "bonus": { "tipo": "usuarioReal", "puntos": 40 },
+              "feedback": "Es lo único que funciona con su celular de botones."
+            },
+            {
+              "id": "app-store",
+              "texto": "App en Play Store",
+              "puntaje": 0,
+              "esTrampa": true,
+              "feedback": "El portero no tiene un smartphone compatible."
+            },
+            {
+              "id": "web",
+              "texto": "Web",
+              "puntaje": 30,
+              "feedback": "Requiere que sepa abrir un navegador; funciona a medias."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "epilogos": [
+    { "min": 800, "max": 1000, "texto": "3 meses después, el colegio no perdió una sola clase de computación." },
+    { "min": 400, "max": 799, "texto": "El sistema funciona casi siempre, aunque a veces Rosa tiene que llamar para avisar." },
+    { "min": 0,   "max": 399, "texto": "La app quedó instalada en un solo celular y nadie la usó." }
+  ]
+}
