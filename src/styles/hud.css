@@ -119,14 +119,34 @@
   font-weight: 600;
 }
 
-.hud-escena {
+.hud-intro {
   flex: 1;
+  display: flex;
+  gap: 14px;
   min-height: 0;
+}
+
+.hud-escena {
+  flex: 0 0 320px;
+  min-height: 0;
+  display: flex;
+}
+
+.hud-escena .escena {
+  flex: 1;
 }
 
 .hud-panel {
   padding: 16px 20px;
   max-height: 300px;
+  overflow-y: auto;
+}
+
+.hud-panel-decision {
+  flex: 1;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
 }
 
@@ -140,6 +160,15 @@
   color: var(--text-dim);
   line-height: 1.5;
   margin-bottom: 14px;
+}
+
+/* Intro de fase: el panel de explicacion ocupa todo el alto disponible. */
+.hud-explicacion-intro {
+  flex: 1;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hud-footer {

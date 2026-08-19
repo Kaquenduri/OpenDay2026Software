@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useGame } from '../engine/useGame';
-import { minijuegoPorEstilo } from '../minigames';
+import { minijuegoPorTipo } from '../minigames';
 import TopBar from '../ui/TopBar';
-import EscenaCliente from '../ui/EscenaCliente';
+import ClienteFlotante from '../ui/ClienteFlotante';
+import { calcularEstadoActualDecision } from '../ui/estadosCliente';
 import '../styles/hud.css';
 
 const ORDEN_FASES = ['descubrir', 'disenar', 'construir', 'probar', 'desplegar'];
@@ -151,10 +152,7 @@ function CuerpoFase({ escenario, fase, faseIndex, decisionIndex, respuestas, tie
         {sidebar}
         <div className="hud-principal">
           {badge}
-          <div className="hud-escena">
-            <EscenaCliente nombre={escenario.cliente.nombre} rol={escenario.cliente.rol} dialogo={fase.intro} />
-          </div>
-          <div className="panel hud-panel hud-explicacion">
+          <div className="panel hud-panel hud-explicacion hud-explicacion-intro">
             <div className="titulo">{fase.titulo} · {fase.rol}</div>
             <div className="texto">{fase.explicacion}</div>
             <button type="button" className="btn-primary" onClick={() => setExplicacionVista(true)}>Entiendo, comenzar</button>
@@ -165,12 +163,12 @@ function CuerpoFase({ escenario, fase, faseIndex, decisionIndex, respuestas, tie
   }
 
   const decision = fase.decisiones[decisionIndex];
-  const Minijuego = minijuegoPorEstilo[fase.estilo];
+  const Minijuego = minijuegoPorTipo[decision.tipoInteraccion];
   const yaResuelta = !!respuestas[decision.id];
 
-  function manejarElegir(opcionIds) {
+  function manejarElegir(opcionIds, puntajeDirecto) {
     if (yaResuelta) return;
-    responderDecision(decision.id, opcionIds);
+    responderDecision(decision.id, opcionIds, puntajeDirecto);
   }
 
   return (
@@ -178,11 +176,12 @@ function CuerpoFase({ escenario, fase, faseIndex, decisionIndex, respuestas, tie
       {sidebar}
       <div className="hud-principal">
         {badge}
-        <div className="hud-escena">
-          <EscenaCliente nombre={escenario.cliente.nombre} rol={escenario.cliente.rol} dialogo={fase.intro} />
-        </div>
-        <div className="panel hud-panel">
-          <Minijuego key={decision.id} decision={decision} onElegir={manejarElegir} />
+        <div className="panel hud-panel hud-panel-decision">
+          <Minijuego
+            key={decision.id}
+            decision={decision}
+            onElegir={manejarElegir}
+          />
           {yaResuelta && (
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
               <button type="button" className="btn-primary" onClick={siguienteDecision}>Continuar →</button>
@@ -198,6 +197,24 @@ export default function PantallaJuego() {
   const { state, responderDecision, siguienteDecision, reiniciar } = useGame();
   const { escenario, faseIndex, decisionIndex, tiempoGlobalRestante, puntajeAcumulado, respuestas } = state;
   const fase = escenario.fases[faseIndex];
+
+  // Calculamos el estado del personaje para mostrarlo en el topbar (avatar
+  // compacto). Replicamos la lógica del CuerpoFase: la decisión actual
+  // respondida -> reacción, si no -> idle.
+  const decisionActualTopbar = fase.decisiones[decisionIndex];
+  const respuestaActualTopbar = decisionActualTopbar
+    ? respuestas[decisionActualTopbar.id]
+    : null;
+  const estadoClienteTopbar = calcularEstadoActualDecision(
+    decisionActualTopbar,
+    respuestaActualTopbar,
+  );
+
+  // Texto del ClienteFlotante. Sale del mensaje de la decision actual si
+  // está disponible, si no del intro de la fase, si no vacío (no se
+  // muestra la burbuja).
+  const decisionActual = fase.decisiones[decisionIndex];
+  const textoFlotante = decisionActual?.mensajeClienteDecision ?? fase.intro ?? '';
 
   return (
     <div className="hud">
@@ -219,6 +236,7 @@ export default function PantallaJuego() {
         <span>TECSUP · Formación que transforma</span>
         <span>Diseño y Desarrollo de Software · Centro de Innovación Tecnológica</span>
       </div>
+      <ClienteFlotante texto={textoFlotante} estado={estadoClienteTopbar} />
     </div>
   );
 }

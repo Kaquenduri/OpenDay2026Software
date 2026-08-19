@@ -1,0 +1,289 @@
+/* Estilos del minijuego de arquitectura de nodos. Vista SVG de la arquitectura
+   del proyecto, con nodos apagados/activos/objetivo, conexiones animadas y
+   el panel de mecanografía. */
+
+/* Contenedor principal. */
+.arquitectura {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.arquitectura-vacia {
+  text-align: center;
+  color: var(--text-dim);
+  padding: 40px;
+}
+
+/* Header con puntaje. */
+.arquitectura-puntos {
+  font-family: var(--pixel);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arquitectura-puntos strong {
+  color: var(--green);
+  font-size: 14px;
+}
+
+.arquitectura-puntos .hint-cancelar {
+  font-family: var(--body);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+/* Caja de narración de Rosa. */
+.arquitectura-narracion {
+  background: var(--panel-alt);
+  border-left: 4px solid var(--cyan);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.arquitectura-narracion .etiqueta {
+  font-family: var(--pixel);
+  font-size: 11px;
+  color: var(--cyan);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-right: 8px;
+}
+
+/* Contenedor del SVG. */
+.arquitectura-svg-wrap {
+  background: linear-gradient(180deg, #0b1220, #131d3a);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 16px;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arquitectura-svg {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  display: block;
+}
+
+/* Estados de los nodos. Los transforms de position SIEMPRE vienen del
+   atributo `transform` del <g>; acá solo definimos apariencia visual. */
+.arquitectura-svg .nodo {
+  cursor: pointer;
+}
+
+.arquitectura-svg .nodo rect {
+  transition: fill 0.25s ease, stroke 0.25s ease, stroke-width 0.25s ease;
+}
+
+.arquitectura-svg .nodo .nodo-label {
+  font-family: var(--pixel);
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  user-select: none;
+  pointer-events: none;
+  transition: fill 0.25s ease;
+}
+
+/* Nodo apagado: solo el contorno tenue. */
+.arquitectura-svg .nodo.nodo-apagado rect {
+  fill: #1a2440;
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+.arquitectura-svg .nodo.nodo-apagado .nodo-label {
+  fill: var(--text-dim);
+}
+
+/* Nodo activo (ya prendido): verde lleno. */
+.arquitectura-svg .nodo.nodo-activo rect {
+  fill: rgba(47, 230, 166, 0.18);
+  stroke: var(--green);
+  stroke-width: 3;
+}
+
+.arquitectura-svg .nodo.nodo-activo .nodo-label {
+  fill: var(--green);
+  font-weight: 700;
+}
+
+/* Nodo objetivo: cyan con pulse, este es el que hay que tocar. */
+.arquitectura-svg .nodo.nodo-objetivo rect {
+  fill: rgba(74, 217, 255, 0.18);
+  stroke: var(--cyan);
+  stroke-width: 4;
+  animation: pulse-stroke 1.5s ease-in-out infinite;
+}
+
+.arquitectura-svg .nodo.nodo-objetivo .nodo-label {
+  fill: var(--cyan);
+  font-weight: 700;
+}
+
+/* Nodo origen: dorado con pulse. */
+.arquitectura-svg .nodo.nodo-origen rect {
+  fill: rgba(255, 209, 102, 0.18);
+  stroke: var(--gold);
+  stroke-width: 4;
+  animation: pulse-stroke 1.5s ease-in-out infinite;
+}
+
+.arquitectura-svg .nodo.nodo-origen .nodo-label {
+  fill: var(--gold);
+  font-weight: 700;
+}
+
+/* Nodo origen YA seleccionado: relleno dorado sólido, indicando "estás
+   dibujando una conexión desde acá". */
+.arquitectura-svg .nodo.nodo-origen-seleccionado rect {
+  fill: rgba(255, 209, 102, 0.4);
+  stroke: var(--gold);
+  stroke-width: 5;
+  animation: pulse-stroke 1.2s ease-in-out infinite;
+}
+
+.arquitectura-svg .nodo.nodo-origen-seleccionado .nodo-label {
+  fill: var(--gold);
+  font-weight: 700;
+}
+
+/* Nodo destino: cyan con pulse, esperando el segundo clic. */
+.arquitectura-svg .nodo.nodo-destino rect {
+  fill: rgba(74, 217, 255, 0.22);
+  stroke: var(--cyan);
+  stroke-width: 4;
+  animation: pulse-stroke 1.5s ease-in-out infinite;
+}
+
+.arquitectura-svg .nodo.nodo-destino .nodo-label {
+  fill: var(--cyan);
+  font-weight: 700;
+}
+
+/* Hover: sutil highlight sin romper el position. */
+.arquitectura-svg .nodo:hover rect {
+  filter: brightness(1.2);
+}
+
+.arquitectura-svg .nodo.nodo-apagado:hover rect {
+  stroke: var(--text-dim);
+  stroke-width: 3;
+}
+
+@keyframes pulse-stroke {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* Conexiones (líneas). */
+.arquitectura-svg .conexion {
+  stroke: var(--green);
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.85;
+  animation: dash-in 0.5s ease-out forwards;
+}
+
+@keyframes dash-in {
+  from { stroke-dasharray: 200; stroke-dashoffset: 200; }
+  to { stroke-dasharray: 200; stroke-dashoffset: 0; }
+}
+
+/* Línea en vivo que sigue el cursor cuando hay un origen seleccionado. */
+.arquitectura-svg .linea-cursor {
+  stroke: var(--gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 8 6;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Modal de mecanografía embebido. */
+.arquitectura-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.arquitectura-modal .label-pixel {
+  color: var(--cyan);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+/* Footer del paso (botón siguiente). */
+.arquitectura-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+/* Vista de finalizado. */
+.arquitectura-final {
+  background: rgba(47, 230, 166, 0.08);
+  border: 2px solid var(--green);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.arquitectura-final .puntos-finales {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.arquitectura-final .puntos-finales .valor {
+  font-family: var(--pixel);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.arquitectura-final .puntos-finales .etiqueta {
+  font-family: var(--pixel);
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.arquitectura-final .feedback-final {
+  color: var(--text);
+  font-size: 14px;
+  max-width: 400px;
+  line-height: 1.4;
+}
+
+/* Responsive: si la pantalla es muy chica, achicar los nodos via SVG. */
+@media (max-width: 900px) {
+  .arquitectura-svg-wrap {
+    min-height: 360px;
+    padding: 16px 8px;
+  }
+  .arquitectura-svg .nodo .nodo-label {
+    font-size: 14px;
+  }
+}

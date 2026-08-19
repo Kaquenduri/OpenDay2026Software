@@ -1,0 +1,275 @@
+{
+  "id": "ccorca-v2",
+  "titulo": "Luz para Ccorca",
+  "version": 2,
+  "cliente": {
+    "nombre": "Rosa",
+    "rol": "Profesora",
+    "dolorFrase": "Las baterías se descargan sin aviso y los chicos pierden clases de computación.",
+    "imagen": null
+  },
+  "criterioDesempate": "puntaje-construir",
+  "fases": [
+    {
+      "id": "descubrir",
+      "rol": "Analista",
+      "titulo": "Fase 1 · Descubrir",
+      "explicacion": "En una empresa de software, antes de programar cualquier cosa, alguien tiene que hablar con el cliente y entender bien su problema. A esa persona se le llama analista, y ese vas a ser tú ahora. La profesora Rosa tiene un problema con las baterías de su colegio: vas a hacerle 3 preguntas para entenderlo mejor. Elige con cuidado: cada pregunta que uses en algo que no importa es una que ya no vas a poder hacer.",
+      "intro": "Videollamada con la profesora Rosa. Tienes tiempo para 3 preguntas.",
+      "imagen": null,
+      "decisiones": [
+        {
+          "id": "descubrir-1",
+          "tipoInteraccion": "mapa-calor",
+          "pregunta": "Mirá el plano del colegio. Marcá los 3 lugares donde pasan cosas relacionadas con el problema de Rosa. Cada clic cuenta como un intento.",
+          "mensajeClienteDecision": "Te dejé recorrer el colegio. Tocá en el plano solo las partes que tienen que ver con mi problema de las baterías.",
+          "metaMinijuego": {
+            "svg": "<svg viewBox=\"0 0 600 400\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"600\" height=\"400\" fill=\"#7c8d5a\"/><rect x=\"0\" y=\"0\" width=\"600\" height=\"120\" fill=\"#9bb5d2\"/><text x=\"300\" y=\"30\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-size=\"14\" font-weight=\"800\" fill=\"#3a2c1e\">PLANO DEL COLEGIO · I.E. CCORCA</text><rect x=\"80\" y=\"160\" width=\"160\" height=\"100\" fill=\"#c9a06a\" stroke=\"#5a4226\" stroke-width=\"2\"/><text x=\"160\" y=\"215\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-size=\"12\" font-weight=\"800\" fill=\"#3a2c1e\">SALA DE CÓMPUTO</text><rect x=\"340\" y=\"80\" width=\"120\" height=\"60\" fill=\"#d4b888\" stroke=\"#5a4226\" stroke-width=\"2\"/><text x=\"400\" y=\"115\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-size=\"11\" font-weight=\"800\" fill=\"#3a2c1e\">OFICINA ROSA</text><rect x=\"430\" y=\"240\" width=\"80\" height=\"50\" fill=\"#7a5a34\" stroke=\"#3a2c1e\" stroke-width=\"2\"/><text x=\"470\" y=\"270\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#fff\">CASETA</text><rect x=\"60\" y=\"300\" width=\"100\" height=\"60\" fill=\"#a98256\" stroke=\"#5a4226\" stroke-width=\"2\"/><text x=\"110\" y=\"335\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-size=\"11\" font-weight=\"700\" fill=\"#3a2c1e\">ALMACÉN</text><rect x=\"240\" y=\"310\" width=\"180\" height=\"70\" fill=\"#8fb86a\" stroke=\"#3a5a23\" stroke-width=\"2\"/><text x=\"330\" y=\"350\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-size=\"11\" font-weight=\"700\" fill=\"#3a2c1e\">PATIO</text><rect x=\"480\" y=\"60\" width=\"80\" height=\"50\" fill=\"#b8a085\" stroke=\"#5a4226\" stroke-width=\"2\"/><text x=\"520\" y=\"90\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#3a2c1e\">BAÑOS</text><rect x=\"0\" y=\"380\" width=\"600\" height=\"20\" fill=\"#8a6b45\"/><line x1=\"0\" y1=\"160\" x2=\"600\" y2=\"160\" stroke=\"#5a4226\" stroke-width=\"1\" stroke-dasharray=\"4 4\"/></svg>",
+            "zonasClicables": [
+              { "id": "sala", "label": "Sala de cómputo", "cx": 160, "cy": 210, "r": 50, "esCritica": true },
+              { "id": "caseta", "label": "Caseta del portero", "cx": 470, "cy": 265, "r": 36, "esCritica": true },
+              { "id": "oficina", "label": "Oficina de Rosa", "cx": 400, "cy": 110, "r": 42, "esCritica": true },
+              { "id": "almacen", "label": "Almacén", "cx": 110, "cy": 330, "r": 40, "esCritica": false },
+              { "id": "patio", "label": "Patio", "cx": 330, "cy": 345, "r": 44, "esCritica": false },
+              { "id": "banos", "label": "Baños", "cx": 520, "cy": 85, "r": 32, "esCritica": false }
+            ],
+            "maxSeleccion": 3,
+            "penalizacionPorIntentoExtra": 10
+          },
+          "tablaPuntaje": { "3": 60, "2": 30, "1": 0, "0": 0 },
+          "opciones": []
+        },
+        {
+          "id": "descubrir-2",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Elige tu segunda pregunta",
+          "mensajeClienteDecision": "Ya entendiste qué partes del colegio están metidas. Ahora hacé la pregunta más importante que se te ocurra.",
+          "opciones": [
+            { "id": "wifi", "texto": "¿Hay señal de internet en el colegio?", "puntaje": 60, "feedback": "Descubrimiento clave: la solución tiene que funcionar por SMS, no por wifi." },
+            { "id": "anos-colegio", "texto": "¿Cuántos años tiene el colegio?", "puntaje": 0, "esTrampa": true, "feedback": "Simpático, pero no acerca a ninguna decisión de diseño." }
+          ]
+        },
+        {
+          "id": "descubrir-3",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Elige tu tercera pregunta",
+          "mensajeClienteDecision": "Última pregunta. Asegurate de no quedarte con la duda.",
+          "opciones": [
+            { "id": "celular-portero", "texto": "¿Qué pasa cuando el celular del portero se queda sin batería?", "puntaje": 60, "feedback": "Excelente: confirma que la solución debe ser a prueba de fallos." },
+            { "id": "cuantos-alumnos", "texto": "¿Cuántos estudiantes usan la sala de cómputo?", "puntaje": 30, "feedback": "Útil para dimensionar, pero no es la pregunta más urgente." },
+            { "id": "android-iphone", "texto": "¿Prefiere Android o iPhone?", "puntaje": 0, "esTrampa": true, "feedback": "Preguntar por marcas antes de entender el problema es empezar al revés." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "disenar",
+      "rol": "Diseñador UX",
+      "titulo": "Fase 2 · Diseñar",
+      "explicacion": "Ya sabes que el portero revisa las baterías, que no hay wifi y que su teléfono se queda sin batería seguido. Ahora te toca ser el diseñador: la persona que decide qué ve el portero en la pantalla. La regla de oro del diseño no es agregar cosas bonitas, es elegir bien qué NO poner.",
+      "intro": "Con lo que sabes de Rosa y el portero, decide qué va en la pantalla.",
+      "imagen": null,
+      "decisiones": [
+        {
+          "id": "disenar-1",
+          "tipoInteraccion": "seleccion-cards",
+          "pregunta": "Elegí el diseño del celular del portero: pensá qué le sirve a él, no lo que se ve más bonito.",
+          "mensajeClienteDecision": "El portero mide baterías dos veces por día. No es técnico, no tiene smartphone, y solo lee castellano. Pensá para él, no para vos.",
+          "metaMinijuego": {
+            "imagenes": [
+              {
+                "id": "v1",
+                "label": "Versión 1",
+                "descripcion": "Pantalla con un único botón verde grande. Sin texto, sin números, sin indicadores.",
+                "puntaje": 0,
+                "esTrampa": true,
+                "feedback": "Sin información clave, el portero no sabe qué pasa con la batería.",
+                "svg": "<svg viewBox=\"0 0 200 320\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"0\" y=\"0\" width=\"200\" height=\"320\" fill=\"#0f1626\" stroke=\"#3a4a6a\" stroke-width=\"2\" rx=\"16\"/><rect x=\"20\" y=\"20\" width=\"160\" height=\"40\" fill=\"#0f1626\"/><rect x=\"55\" y=\"120\" width=\"90\" height=\"80\" fill=\"#2fe6a6\" stroke=\"#1a8a64\" stroke-width=\"2\" rx=\"10\"/><text x=\"100\" y=\"170\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"20\" font-weight=\"800\" fill=\"#08281f\">OK</text></svg>"
+              },
+              {
+                "id": "v3",
+                "label": "Versión 3",
+                "descripcion": "Pantalla completa con gráfico de los últimos 30 días, configuración y 4 submenús.",
+                "puntaje": 30,
+                "esTrampa": false,
+                "feedback": "Se ve profesional, pero al portero le cuesta encontrar lo importante en un momento de urgencia.",
+                "svg": "<svg viewBox=\"0 0 200 320\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"0\" y=\"0\" width=\"200\" height=\"320\" fill=\"#1a2440\" stroke=\"#3a4a6a\" stroke-width=\"2\" rx=\"12\"/><rect x=\"10\" y=\"10\" width=\"55\" height=\"28\" fill=\"#25324f\" rx=\"2\"/><rect x=\"68\" y=\"10\" width=\"55\" height=\"28\" fill=\"#25324f\" rx=\"2\"/><rect x=\"126\" y=\"10\" width=\"55\" height=\"28\" fill=\"#25324f\" rx=\"2\"/><rect x=\"14\" y=\"44\" width=\"90\" height=\"34\" fill=\"#25324f\" rx=\"2\"/><line x1=\"20\" y1=\"54\" x2=\"98\" y2=\"54\" stroke=\"#4ad9ff\" stroke-width=\"1\"/><line x1=\"20\" y1=\"60\" x2=\"98\" y2=\"60\" stroke=\"#4ad9ff\" stroke-width=\"1\"/><line x1=\"20\" y1=\"66\" x2=\"98\" y2=\"66\" stroke=\"#4ad9ff\" stroke-width=\"1\"/><rect x=\"108\" y=\"44\" width=\"80\" height=\"34\" fill=\"#25324f\" rx=\"2\"/><line x1=\"114\" y1=\"54\" x2=\"182\" y2=\"54\" stroke=\"#ff5c9d\" stroke-width=\"1\"/><line x1=\"114\" y1=\"60\" x2=\"182\" y2=\"60\" stroke=\"#ff5c9d\" stroke-width=\"1\"/><rect x=\"14\" y=\"84\" width=\"80\" height=\"20\" fill=\"#1a2440\" rx=\"2\"/><rect x=\"98\" y=\"84\" width=\"90\" height=\"20\" fill=\"#1a2440\" rx=\"2\"/><rect x=\"10\" y=\"112\" width=\"180\" height=\"30\" fill=\"#2fe6a6\" stroke=\"#1a8a64\" stroke-width=\"1\" rx=\"3\"/><text x=\"100\" y=\"132\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#08281f\">OK</text><rect x=\"10\" y=\"148\" width=\"60\" height=\"40\" fill=\"#25324f\" rx=\"2\"/><rect x=\"73\" y=\"148\" width=\"60\" height=\"40\" fill=\"#25324f\" rx=\"2\"/><rect x=\"136\" y=\"148\" width=\"54\" height=\"40\" fill=\"#25324f\" rx=\"2\"/><rect x=\"10\" y=\"193\" width=\"180\" height=\"14\" fill=\"#25324f\" rx=\"1\"/><rect x=\"10\" y=\"211\" width=\"180\" height=\"14\" fill=\"#25324f\" rx=\"1\"/><rect x=\"10\" y=\"229\" width=\"180\" height=\"14\" fill=\"#25324f\" rx=\"1\"/><rect x=\"10\" y=\"247\" width=\"180\" height=\"14\" fill=\"#25324f\" rx=\"1\"/><rect x=\"10\" y=\"270\" width=\"55\" height=\"20\" fill=\"#3a4a6a\" rx=\"2\"/><rect x=\"68\" y=\"270\" width=\"55\" height=\"20\" fill=\"#3a4a6a\" rx=\"2\"/><rect x=\"126\" y=\"270\" width=\"55\" height=\"20\" fill=\"#3a4a6a\" rx=\"2\"/></svg>"
+              },
+              {
+                "id": "v2",
+                "label": "Versión 2",
+                "descripcion": "Pantalla con un botón grande, un número grande de porcentaje y un aviso corto de alerta.",
+                "puntaje": 60,
+                "esTrampa": false,
+                "feedback": "Bien: el portero sabe todo lo importante sin distracciones.",
+                "svg": "<svg viewBox=\"0 0 200 320\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"0\" y=\"0\" width=\"200\" height=\"320\" fill=\"#1a2440\" stroke=\"#3a4a6a\" stroke-width=\"2\" rx=\"12\"/><rect x=\"20\" y=\"20\" width=\"160\" height=\"40\" fill=\"#1a2440\"/><text x=\"100\" y=\"80\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"36\" font-weight=\"800\" fill=\"#4ad9ff\">87%</text><text x=\"100\" y=\"100\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#8fa0c2\">batería</text><circle cx=\"40\" cy=\"135\" r=\"14\" fill=\"#2fe6a6\" stroke=\"#1a8a64\" stroke-width=\"2\"/><text x=\"40\" y=\"140\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#08281f\">✓</text><rect x=\"65\" y=\"125\" width=\"120\" height=\"22\" fill=\"#2b1f3a\" stroke=\"#ff5c9d\" stroke-width=\"2\" rx=\"4\"/><text x=\"125\" y=\"141\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"700\" fill=\"#ff5c9d\">ALERTA</text><rect x=\"20\" y=\"180\" width=\"160\" height=\"60\" fill=\"#2fe6a6\" stroke=\"#1a8a64\" stroke-width=\"2\" rx=\"6\"/><text x=\"100\" y=\"220\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"16\" font-weight=\"700\" fill=\"#08281f\">ESTADO OK</text></svg>"
+              }
+            ]
+          },
+          "opciones": []
+        },
+        {
+          "id": "disenar-2",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "¿Pantalla en español o con iconos sin texto?",
+          "mensajeClienteDecision": "Imaginate al portero abriendo la app bajo presión, apurado, sin mirar mucho.",
+          "opciones": [
+            { "id": "iconos", "texto": "Iconos sin texto", "puntaje": 60, "feedback": "El portero no siempre lee rápido bajo presión: los iconos ganan." },
+            { "id": "espanol", "texto": "Texto en español", "puntaje": 30, "feedback": "Funciona, pero es más lento de entender de un vistazo." },
+            { "id": "ingles-tecnico", "texto": "Términos técnicos en inglés", "puntaje": 0, "esTrampa": true, "feedback": "El portero no entiende jerga técnica en otro idioma." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "construir",
+      "rol": "Desarrollador",
+      "titulo": "Fase 3 · Construir",
+      "explicacion": "Programar no es magia: es traducir una decisión humana en una regla exacta que la computadora pueda seguir. En esta fase vas a diseñar la arquitectura de tu proyecto. Vas a ver 4 piezas (la app, el backend, la base de datos y el servicio de SMS) y tu trabajo es conectarlas en el orden correcto. Cada vez que actives o conectes una pieza, vas a escribir una línea de código. Mientras más rápido lo hagas, más puntos. Esta fase vale el doble que las otras: si empatás en el ranking, gana el que mejor la haya resuelto.",
+      "intro": "Activá cada pieza y conectalas entre sí. Escribí el código de cada paso.",
+      "imagen": null,
+      "decisiones": [
+        {
+          "id": "construir-arquitectura",
+          "tipoInteraccion": "arquitectura-nodos",
+          "pregunta": "Conectá la arquitectura de tu proyecto",
+          "mensajeClienteDecision": "Ahora programá el sistema. Cada pieza que prendés y cada conexión que hacés es una línea de código real.",
+          "metaMinijuego": {
+            "nodos": [
+              { "id": "app", "label": "APP", "x": 100, "y": 180 },
+              { "id": "back", "label": "BACK", "x": 280, "y": 180 },
+              { "id": "db", "label": "DB", "x": 460, "y": 180 },
+              { "id": "api-sms", "label": "API SMS", "x": 460, "y": 320 }
+            ],
+            "pasos": [
+              {
+                "id": "p1",
+                "tipo": "activar",
+                "nodoObjetivo": "back",
+                "codigo": "recibir_alerta(bateria)",
+                "puntosMax": 30,
+                "puntosMin": 10,
+                "segundosParaSalto": 30
+              },
+              {
+                "id": "p2",
+                "tipo": "conectar",
+                "nodoOrigen": "back",
+                "nodoDestino": "app",
+                "codigo": "fetch('/alerta')",
+                "puntosMax": 30,
+                "puntosMin": 10,
+                "segundosParaSalto": 30
+              },
+              {
+                "id": "p3",
+                "tipo": "activar",
+                "nodoObjetivo": "db",
+                "codigo": "guardar(bateria)",
+                "puntosMax": 30,
+                "puntosMin": 10,
+                "segundosParaSalto": 30
+              },
+              {
+                "id": "p4",
+                "tipo": "conectar",
+                "nodoOrigen": "back",
+                "nodoDestino": "db",
+                "codigo": "db.INSERT()",
+                "puntosMax": 30,
+                "puntosMin": 10,
+                "segundosParaSalto": 30
+              },
+              {
+                "id": "p5",
+                "tipo": "activar",
+                "nodoObjetivo": "api-sms",
+                "codigo": "enviarSMS(portero)",
+                "puntosMax": 30,
+                "puntosMin": 10,
+                "segundosParaSalto": 30
+              },
+              {
+                "id": "p6",
+                "tipo": "conectar",
+                "nodoOrigen": "back",
+                "nodoDestino": "api-sms",
+                "codigo": "http.post()",
+                "puntosMax": 30,
+                "puntosMin": 10,
+                "segundosParaSalto": 30
+              }
+            ],
+            "narraciones": [
+              { "antesDePaso": "p1", "texto": "Empezá por el cerebro de todo: el BACK. Él es el que recibe los datos." },
+              { "antesDePaso": "p2", "texto": "BACK listo. ¿Y cómo toca esto el portero? ¿Qué es lo primero que él ve?" },
+              { "antesDePaso": "p3", "texto": "Perfecto. El usuario entra datos a la APP. ¿Dónde guardamos esa información?" },
+              { "antesDePaso": "p4", "texto": "Ahora conectá el BACK con la DB para que cada lectura quede registrada." },
+              { "antesDePaso": "p5", "texto": "Listo. ¿Y cómo llega el SMS al portero? ¿Quién se lo manda?" },
+              { "antesDePaso": "p6", "texto": "Última pieza: BACK tiene que hablar con la API SMS para avisar." }
+            ]
+          },
+          "opciones": []
+        }
+      ]
+    },
+    {
+      "id": "probar",
+      "rol": "QA",
+      "titulo": "Fase 4 · Probar",
+      "explicacion": "Antes de que algo llegue a los usuarios reales, alguien tiene que probarlo a fondo y decidir qué arreglar primero: a esa persona se le llama QA. Nunca hay tiempo para arreglar todo, así que hay que priorizar. Tu sistema ya está instalado en el colegio y llegaron reportes de problemas.",
+      "intro": "Tu app ya está en el colegio. Llegaron reportes; solo alcanzas a arreglar uno.",
+      "imagen": null,
+      "decisiones": [
+        {
+          "id": "probar-1",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "Solo alcanzas a arreglar 1 reporte. ¿Cuál?",
+          "mensajeClienteDecision": "Me llegaron 3 quejas de los padres. No tenemos tiempo para arreglar todo. ¿Cuál arreglás primero?",
+          "opciones": [
+            { "id": "bateria-rapida", "texto": "No llega la alerta cuando la batería baja rápido", "puntaje": 60, "bonus": { "tipo": "bugCritico", "puntos": 40 }, "feedback": "Es el bug que causó el problema original: prioridad correcta." },
+            { "id": "alerta-madrugada", "texto": "La alerta llega a las 3 de la mañana", "puntaje": 30, "feedback": "Molesto, pero no rompe el propósito del sistema." },
+            { "id": "logo-chico", "texto": "El logo se ve chico", "puntaje": 0, "esTrampa": true, "feedback": "Cosmético: no vale gastar tu único arreglo en esto." }
+          ]
+        },
+        {
+          "id": "probar-2",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "¿Cómo confirmas que el bug quedó resuelto?",
+          "mensajeClienteDecision": "Ya hiciste el cambio. ¿Cómo te asegurás de que ahora sí anda?",
+          "opciones": [
+            { "id": "prueba-real", "texto": "Pides a Rosa que pruebe con la batería real del colegio", "puntaje": 60, "feedback": "Probar en condiciones reales es la única forma de confiar en el arreglo." },
+            { "id": "revisar-codigo", "texto": "Revisas el código una vez más en pantalla", "puntaje": 30, "feedback": "Ayuda, pero no reemplaza probarlo con el usuario real." },
+            { "id": "asumir-compila", "texto": "Asumes que funciona porque compila sin errores", "puntaje": 0, "esTrampa": true, "feedback": "Que compile no significa que resuelva el problema del portero." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "desplegar",
+      "rol": "DevOps",
+      "titulo": "Fase 5 · Desplegar",
+      "explicacion": "La última etapa es hacer que el sistema realmente llegue a la persona que lo va a usar: eso se llama desplegar, y quien lo hace es el DevOps. De nada sirve construir la mejor app si el usuario real no puede usarla. Tienes que elegir cómo entregarle la alerta al portero, pensando en el celular que él realmente tiene.",
+      "intro": "¿Cómo le hacemos llegar la alerta al portero, don Tomás?",
+      "imagen": null,
+      "decisiones": [
+        {
+          "id": "desplegar-1",
+          "tipoInteraccion": "seleccion-unica",
+          "pregunta": "¿Cómo despliegas la alerta al portero?",
+          "mensajeClienteDecision": "El portero tiene un celular de teclas. No toca pantallas. ¿Cómo le llega la alerta?",
+          "opciones": [
+            { "id": "sms", "texto": "SMS puro", "puntaje": 60, "bonus": { "tipo": "usuarioReal", "puntos": 40 }, "feedback": "Es lo único que funciona con su celular de botones." },
+            { "id": "app-store", "texto": "App en Play Store", "puntaje": 0, "esTrampa": true, "feedback": "El portero no tiene un smartphone compatible." },
+            { "id": "web", "texto": "Web", "puntaje": 30, "feedback": "Requiere que sepa abrir un navegador; funciona a medias." }
+          ]
+        }
+      ]
+    }
+  ],
+  "epilogos": [
+    { "min": 800, "max": 1000, "texto": "3 meses después, el colegio no perdió una sola clase de computación." },
+    { "min": 400, "max": 799, "texto": "El sistema funciona casi siempre, aunque a veces Rosa tiene que llamar para avisar." },
+    { "min": 0, "max": 399, "texto": "La app quedó instalada en un solo celular y nadie la usó." }
+  ]
+}

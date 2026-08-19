@@ -1,0 +1,97 @@
+/* Overlay del cliente. Vive en la esquina inferior izquierda, siempre
+   visible durante la partida. Es un elemento flotante que se sobrepone
+   a cualquier UI. */
+
+.cliente-flotante {
+  position: fixed;
+  bottom: 60px; /* sobre el hud-footer */
+  left: 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 1000;
+  pointer-events: none; /* no bloquea clicks en la UI debajo */
+  max-width: 460px;
+}
+
+/* Avatar con el emoji reactivo. Es más grande para que la animación
+   se vea bien. */
+.cliente-flotante .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--panel-alt);
+  border: 2px solid var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex: 0 0 auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+.cliente-flotante .avatar .estado-cliente {
+  width: 60px;
+  height: 60px;
+}
+
+.cliente-flotante .avatar .emoji {
+  font-size: 36px;
+  line-height: 1;
+}
+
+/* Burbuja del mensaje. */
+.cliente-flotante .burbuja {
+  position: relative;
+  background: var(--panel);
+  border: 2px solid var(--pink);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  pointer-events: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  max-width: 380px;
+}
+
+.cliente-flotante .burbuja .texto {
+  /* sin estilos extra */
+}
+
+/* Pico de la burbuja apuntando al avatar. */
+.cliente-flotante .burbuja .pico {
+  position: absolute;
+  left: -8px;
+  bottom: 14px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 10px solid var(--pink);
+}
+
+@media (max-height: 720px) {
+  .cliente-flotante {
+    bottom: 50px;
+    left: 16px;
+  }
+  .cliente-flotante .avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .cliente-flotante .avatar .estado-cliente {
+    width: 50px;
+    height: 50px;
+  }
+  .cliente-flotante .avatar .emoji {
+    font-size: 30px;
+  }
+  .cliente-flotante .burbuja {
+    font-size: 13px;
+    padding: 8px 12px;
+    max-width: 320px;
+  }
+}

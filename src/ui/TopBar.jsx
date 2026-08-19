@@ -1,6 +1,9 @@
 import '../styles/topbar.css';
 
-export default function TopBar({ mostrarPerfil = true, colegio = 'Colegio San José' }) {
+export default function TopBar({
+  mostrarPerfil = true,
+  colegio = 'Colegio San José',
+}) {
   return (
     <div className="topbar">
       <div className="topbar-logo">
