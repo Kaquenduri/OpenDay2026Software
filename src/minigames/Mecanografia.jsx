@@ -17,6 +17,12 @@ import { useEffect, useRef, useState } from 'react';
 //   - El usuario tiene que tipear el código EXACTO (case-sensitive, sin
 //     autocompletado). Los caracteres tipeados se muestran como válidos
 //     (en verde) o inválidos (en rojo) carácter por carácter.
+//   - NO se puede copiar ni pegar. El puntaje premia la velocidad, así que un
+//     Ctrl+C sobre el código y un Ctrl+V en el campo daba el máximo sin tipear
+//     nada. Se bloquea por dos lados: el código no se puede seleccionar, y el
+//     campo descarta cualquier inserción de más de un carácter (que es lo que
+//     cierra TODAS las vías: pegar, arrastrar texto, autocompletar), en lugar
+//     de ir tapando una por una.
 //   - El puntaje crece linealmente con el progreso Y con la velocidad:
 //     a más rápido el tipeo, máscerca del puntosMax.
 //   - Al saltar, se autocompleta el código y se otorgan puntosMin.
@@ -33,6 +39,7 @@ export default function Mecanografia({
   const [saltado, setSaltado] = useState(false);
   const [segundosInactivo, setSegundosInactivo] = useState(0);
   const [puntosObtenidos, setPuntosObtenidos] = useState(0);
+  const [avisoPegado, setAvisoPegado] = useState(false);
   const inicioRef = useRef(null);
 
   // El timestamp de inicio se setea en un effect para no llamar a
@@ -42,6 +49,14 @@ export default function Mecanografia({
       inicioRef.current = performance.now();
     }
   }, []);
+
+  // El aviso de "no se puede pegar" se muestra un rato y se va solo. Sin esto,
+  // el campo simplemente no reacciona al Ctrl+V y parece estar roto.
+  useEffect(() => {
+    if (!avisoPegado) return undefined;
+    const id = setTimeout(() => setAvisoPegado(false), 2200);
+    return () => clearTimeout(id);
+  }, [avisoPegado]);
 
   // Tick de inactividad: si pasaron `segundosParaSalto` sin tipear, mostrar
   // el botón Saltar. Se activa solo cuando no está terminado.
@@ -74,14 +89,26 @@ export default function Mecanografia({
   function tipear(e) {
     if (terminado) return;
     const next = e.target.value;
-    // Solo aceptamos tipeo hacia adelante (no borrar más allá del inicio).
+    // Borrar siempre se permite.
     if (next.length < escrito.length) {
       setEscrito(next);
       return;
     }
+    // Un juego de tipeo avanza de a una tecla. Un salto de más de un carácter
+    // solo puede venir de un pegado, un arrastre de texto o un autocompletado:
+    // se descarta. Los códigos del escenario son ASCII, así que ningún acento
+    // ni tecla muerta legítima inserta dos caracteres de golpe.
+    if (next.length > escrito.length + 1) {
+      setAvisoPegado(true);
+      return;
+    }
     // Truncar al largo del código (no dejamos escribir de más).
-    const truncated = next.slice(0, codigo.length);
-    setEscrito(truncated);
+    setEscrito(next.slice(0, codigo.length));
+  }
+
+  function bloquear(e) {
+    e.preventDefault();
+    setAvisoPegado(true);
   }
 
   function saltar() {
@@ -124,7 +151,12 @@ export default function Mecanografia({
         gap: 10,
       }}
     >
+      {/* El código se lee, no se selecciona: sin selección no hay Ctrl+C, y
+          tampoco entra en un "seleccionar todo" de la página. */}
       <div
+        onCopy={bloquear}
+        onCut={bloquear}
+        onDragStart={bloquear}
         style={{
           fontFamily: 'monospace',
           fontSize: 16,
@@ -133,6 +165,9 @@ export default function Mecanografia({
           borderRadius: 6,
           minHeight: 32,
           letterSpacing: 1,
+          userSelect: 'none',
+          WebkitUserSelect: 'none',
+          cursor: 'default',
         }}
       >
         {renderCodigo()}
@@ -142,8 +177,14 @@ export default function Mecanografia({
         type="text"
         value={escrito}
         onChange={tipear}
+        onPaste={bloquear}
+        onDrop={bloquear}
         disabled={terminado}
         autoFocus
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
         placeholder="Tipeá acá..."
         style={{
           background: '#0b1220',
@@ -173,6 +214,23 @@ export default function Mecanografia({
           }}
         />
       </div>
+
+      {avisoPegado && !terminado && (
+        <div
+          role="status"
+          style={{
+            fontSize: 12,
+            fontWeight: 700,
+            color: 'var(--gold)',
+            background: 'rgba(255, 209, 102, 0.12)',
+            border: '1px solid var(--gold)',
+            borderRadius: 6,
+            padding: '6px 10px',
+          }}
+        >
+          ✋ Acá no se puede copiar y pegar: hay que tipearlo.
+        </div>
+      )}
 
       {terminado ? (
         <div

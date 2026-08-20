@@ -14,7 +14,19 @@ export function calcularPuntajeDecision(decision, opcionIds, puntajeDirecto = nu
   // calcularon su puntaje internamente paso a paso. El componente nos pasa
   // el total acumulado. No leemos `opciones`.
   if (decision.tipoInteraccion === 'arquitectura-nodos') {
-    return { puntaje: puntajeDirecto ?? 0, bono: 0 };
+    // Si completa la arquitectura a pleno (todos los pasos a 30), suma
+    // `bonusArquitecturaCompleta` del metaMinijuego del JSON.
+    const pasos = decision.metaMinijuego?.pasos ?? [];
+    const maximoPosible = pasos.reduce(
+      (acc, p) => acc + (p.puntosMax ?? 0),
+      0,
+    );
+    const puntaje = puntajeDirecto ?? 0;
+    const bonus =
+      maximoPosible > 0 && puntaje >= maximoPosible
+        ? (decision.metaMinijuego?.bonusArquitecturaCompleta ?? 0)
+        : 0;
+    return { puntaje, bono: bonus };
   }
 
   // Mapa de calor: el componente manda los ids de las zonas marcadas (únicas,

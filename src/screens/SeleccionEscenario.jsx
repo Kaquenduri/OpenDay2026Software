@@ -44,7 +44,7 @@ export default function SeleccionEscenario() {
 
   return (
     <div className="seleccion">
-      <TopBar colegio="Colegio San José" />
+      <TopBar />
 
       <div className="seleccion-cuerpo">
         <div className="seleccion-encabezado">
