@@ -27,7 +27,7 @@
 }
 
 .mapa-calor-pregunta {
-  font-size: var(--fs-md);
+  font-size: var(--fs-lg);
   font-weight: 800;
   line-height: 1.4;
   color: var(--text);
@@ -44,7 +44,7 @@
 }
 
 .mapa-calor-contadores .contador {
-  padding: 4px 8px;
+  padding: 5px 9px;
   background: var(--panel-alt);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -52,7 +52,7 @@
 
 .mapa-calor-contadores .contador strong {
   color: var(--cyan);
-  font-size: 14px;
+  font-size: var(--fs-sm);
   margin-left: 4px;
 }
 

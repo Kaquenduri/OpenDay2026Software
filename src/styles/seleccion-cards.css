@@ -18,7 +18,7 @@
 }
 
 .seleccion-cards-pregunta {
-  font-size: var(--fs-md);
+  font-size: var(--fs-lg);
   font-weight: 800;
   line-height: 1.4;
   color: var(--text);
@@ -104,14 +104,14 @@
 
 .card-label {
   font-family: var(--pixel);
-  font-size: 13px;
+  font-size: var(--fs-md);
   letter-spacing: 1px;
   color: var(--cyan);
   font-weight: 700;
 }
 
 .card-descripcion {
-  font-size: 12px;
+  font-size: var(--fs-sm);
   line-height: 1.4;
   color: var(--text-dim);
   font-weight: 600;

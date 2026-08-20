@@ -53,11 +53,10 @@ function formatearTiempo(seg) {
 function Sidebar({ fase, faseIndex, totalFases, decisionesResueltas, totalDecisionesFase, tiempoGlobalRestante, puntajeAcumulado, cliente, onAbandonar }) {
   return (
     <div className="hud-sidebar">
-      <div className="marca">
-        <div className="word"><span style={{ color: 'var(--cyan)' }}>MISIÓN</span><br />DEPLOY</div>
-        <div className="subtitulo">Tu primer proyecto como desarrollador</div>
-      </div>
-
+      {/* Acá había un bloque de marca ("MISIÓN DEPLOY" + subtítulo) que repetía
+          el wordmark que la TopBar ya muestra permanentemente unos centímetros
+          más arriba. Costaba 79px del sidebar, que a 1366x768 son justo los que
+          necesita el mensaje del cliente para no quedar cortado. */}
       <div className="panel hud-fase-card">
         <div className="rotulo label-pixel">FASE ACTUAL <span style={{ color: 'var(--cyan)' }}>{faseIndex + 1}/{totalFases}</span></div>
         <div className="encabezado">
@@ -79,7 +78,7 @@ function Sidebar({ fase, faseIndex, totalFases, decisionesResueltas, totalDecisi
         <div className="panel hud-stat">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
           <div>
-            <div className="label-pixel">TIEMPO</div>
+            <div className="label-pixel" style={{ fontSize: "10px" }}>TIEMPO</div>
             <div className="valor">{formatearTiempo(tiempoGlobalRestante)}</div>
           </div>
         </div>
@@ -87,7 +86,7 @@ function Sidebar({ fase, faseIndex, totalFases, decisionesResueltas, totalDecisi
         <div className="panel hud-stat">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.4" strokeLinecap="round"><path d="m4 12 5 5L20 6" /></svg>
           <div>
-            <div className="label-pixel">DECISIONES</div>
+            <div className="label-pixel" style={{ fontSize: "10px" }}>DECISIONES</div>
             <div className="valor">{decisionesResueltas} / {totalDecisionesFase}</div>
           </div>
         </div>

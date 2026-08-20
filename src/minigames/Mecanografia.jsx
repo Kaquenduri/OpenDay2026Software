@@ -159,7 +159,7 @@ export default function Mecanografia({
         onDragStart={bloquear}
         style={{
           fontFamily: 'monospace',
-          fontSize: 16,
+          fontSize: 'var(--fs-lg)',
           background: '#0b1220',
           padding: '10px 12px',
           borderRadius: 6,
@@ -192,7 +192,7 @@ export default function Mecanografia({
           borderRadius: 6,
           padding: '10px 12px',
           fontFamily: 'monospace',
-          fontSize: 15,
+          fontSize: 'var(--fs-md)',
           color: 'var(--text)',
         }}
       />
@@ -219,7 +219,7 @@ export default function Mecanografia({
         <div
           role="status"
           style={{
-            fontSize: 12,
+            fontSize: 'var(--fs-sm)',
             fontWeight: 700,
             color: 'var(--gold)',
             background: 'rgba(255, 209, 102, 0.12)',
@@ -236,7 +236,7 @@ export default function Mecanografia({
         <div
           style={{
             fontFamily: 'monospace',
-            fontSize: 13,
+            fontSize: 'var(--fs-sm)',
             color: saltado ? 'var(--gold)' : 'var(--green)',
             fontWeight: 700,
           }}
@@ -251,7 +251,7 @@ export default function Mecanografia({
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            fontSize: 12,
+            fontSize: 'var(--fs-sm)',
             color: 'var(--text-dim)',
           }}
         >
@@ -266,7 +266,7 @@ export default function Mecanografia({
                 background: 'transparent',
                 border: 'none',
                 color: 'var(--text-dim)',
-                fontSize: 12,
+                fontSize: 'var(--fs-sm)',
                 textDecoration: 'underline',
                 cursor: 'pointer',
               }}
